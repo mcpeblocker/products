@@ -168,7 +168,7 @@ app.get('/user/:username',(req,res)=>{
                     <p class="text-center text-secondary">There is no item to show. You can add new item!</p>
                 `)
             } else {
-                let sort_num = 5;
+                let sort_num = 10;
                 let page_num = Math.floor(result.length / sort_num);
                 let id_now = 0;
                 let pagination_el = '<ul class="pagination" style="margin:3% auto">';
@@ -202,7 +202,9 @@ app.get('/user/:username',(req,res)=>{
                             }
                         }
                     }
-                    pagination_el += `<li class="page-item"><a class="page-link"><button style="width:100%;height:100%; background:transparent; border:none; outline: none" type="button" onclick="show(${i})">${i+1}</button></a></li>`;
+                    if(result[i*sort_num]!=undefined){
+                        pagination_el += `<li class="page-item"><a class="page-link"><button style="width:100%;height:100%; background:transparent; border:none; outline: none" type="button" onclick="show(${i})">${i+1}</button></a></li>`;
+                    }
                 }
                 pagination_el += '</ul>'
                 res.write(pagination_el);
