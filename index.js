@@ -170,11 +170,11 @@ app.get('/user/:username',(req,res)=>{
             } else {
                 let sort_num = 10;
                 let page_num = Math.floor(result.length / sort_num);
-                let id_now = 0;
                 let pagination_el = '<ul class="pagination" style="margin:3% auto">';
                 for (var i = 0; i <= page_num; i++) {
                     if(i<page_num) {
-                        for (var k = id_now; k < sort_num; k++) {
+                        var id_now = i*sort_num;
+                        for (var k = id_now; k < sort_num*(i+1); k++) {
                             if (result[k] != undefined) {
                                 res.write(`
                                 <tr class="row page page_${i}">
@@ -184,7 +184,10 @@ app.get('/user/:username',(req,res)=>{
                                     <td class="col-2"><button class="btn btn-primary btn-block" type="button" onclick="window.location.pathname += '/edit/${result[k].id}'"><i class="fa fa-pencil"></i> Edit</button></td>
                                     <td class="col-2"><button class="btn btn-danger btn-block" type="button" onclick="window.location.pathname += '/delete/${result[k].id}'"><i class="fas fa-file-excel"></i> Delete</button></td>
                                 </tr>
-                        `);
+                                `);
+                                id_now++;
+                            } else {
+                                console.log('Error with ' + id_now);
                             }
                         }
                     } else {
