@@ -1,2 +1,2 @@
-# sample_shopping
-(little)sample shopping project with products and using nodejs
+# Products app
+(Little)Simple shopping app developed in nodejs.
